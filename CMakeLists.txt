@@ -24,15 +24,20 @@ if(NOT (CMAKE_BUILD_TYPE STREQUAL "Debug"))
     set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
 endif()
 
-if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)
+#           动态库      静态库           # Ref： https://blog.csdn.net/liuzehn/article/details/78424972
+# Windows    .dll       .lib
+# Linux      .so        .a
+# Mac        .dylib     .a             (.framework 即可能是动态库、也可能是静态库)
+
+if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)   # 设置 可执行文件 目标的输出路径
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 endif()
 
-if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+if(NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)   # 设置动态库的输出目录
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 endif()
 
-if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)
+if(NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY)   # 设置静态库的输出目录
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 endif()
 
